@@ -39,7 +39,7 @@ namespace Program.cs
 			Random rnd = new Random();
 			int manticoreDistance = rnd.Next(1, 101);
 
-			Console.WriteLine("The Manticore is approaching! How far away is it???");
+			Console.WriteLine("The Manticore has appeared! What distance should we shoot it at???");
 			int userGuess;
 			bool inputValidate;
 			while (cityHealth > 0 & manticoreHealth > 0)
@@ -47,7 +47,7 @@ namespace Program.cs
 				do
 				{
 					roundNum++;
-					inputValidate = Int32.TryParse(Console.ReadLine(), out userGuess);
+					inputValidate = Int32.TryParse(Console.ReadLine(), out userGuess); //attempt to get a number from user input. if successful, place the number in userGuess and mark inputValidate true. if unsuccessful, mark inputValidate false.
 					if (inputValidate == false)
 					{
 						Console.WriteLine("Sorry, you need to input a number between 1 and 100.");
@@ -55,7 +55,7 @@ namespace Program.cs
 				} while (inputValidate == false);
 				if (userGuess == manticoreDistance)
 				{
-					if (roundNum % 3 == 0 & roundNum % 5 == 0)
+					if (roundNum % 3 == 0 & roundNum % 5 == 0) //on certain rounds we do more damage than usual, to allow the user to catch up to and overtake Manticore in damage.
 					{
 						manticoreHealth -= 10;
 						Console.WriteLine("Direct hit! Your engineers and wizards have teamed up to deal a final desperate blow!!!");
@@ -81,7 +81,14 @@ namespace Program.cs
 					Console.WriteLine("Too close! Your attack didn't make it far enough.");
 				}
 				cityHealth--;
-				Console.WriteLine($"The Manticore is attacking! Your city has {cityHealth} health remaining.");
+				Console.WriteLine($"The Manticore is attacking! Your city has {cityHealth} health remaining. \nWhat distance should we shoot it at?");
+			}
+			if (cityHealth <= 0)
+			{
+				Console.WriteLine("The Manticore has destroyed your city... GAME OVER");
+			} else if (manticoreHealth <= 0)
+			{
+				Console.WriteLine("The Manticore is sunk! You defended the city!");
 			}
 		}
 	}
