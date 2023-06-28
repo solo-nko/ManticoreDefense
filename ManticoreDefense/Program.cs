@@ -46,6 +46,7 @@ namespace Program.cs
 			{
 				do
 				{
+					roundNum++;
 					inputValidate = Int32.TryParse(Console.ReadLine(), out userGuess);
 					if (inputValidate == false)
 					{
@@ -54,7 +55,24 @@ namespace Program.cs
 				} while (inputValidate == false);
 				if (userGuess == manticoreDistance)
 				{
-					Console.WriteLine("Direct hit! The Manticore has suffered damage.");
+					if (roundNum % 3 == 0 & roundNum % 5 == 0)
+					{
+						manticoreHealth -= 10;
+						Console.WriteLine("Direct hit! Your engineers and wizards have teamed up to deal a final desperate blow!!!");
+					} else if (roundNum % 5 == 0)
+					{
+						manticoreHealth -= 5;
+						Console.WriteLine("Direct hit! Your wizards call lightning down on the Manticore!!");
+					} else if (roundNum % 3 == 0)
+					{
+						manticoreHealth -= 3;
+						Console.WriteLine("Direct hit! Your engineers launch fireballs at the Manticore!!");
+					} else
+					{
+						manticoreHealth -= 1;
+						Console.WriteLine("Direct hit! The Manticore has suffered damage.");
+					}
+					
 				} else if (userGuess > manticoreDistance)
 				{
 					Console.WriteLine("Overshot! Your attack landed too far!");
