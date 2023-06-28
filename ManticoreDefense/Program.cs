@@ -37,7 +37,34 @@ namespace Program.cs
 			int cityHealth = 15;
 			int manticoreHealth = 10;
 			Random rnd = new Random();
-			int manticoreDistance = rnd.Next(1, 100);
+			int manticoreDistance = rnd.Next(1, 101);
+
+			Console.WriteLine("The Manticore is approaching! How far away is it???");
+			int userGuess;
+			bool inputValidate;
+			while (cityHealth > 0 & manticoreHealth > 0)
+			{
+				do
+				{
+					inputValidate = Int32.TryParse(Console.ReadLine(), out userGuess);
+					if (inputValidate == false)
+					{
+						Console.WriteLine("Sorry, you need to input a number between 1 and 100.");
+					}
+				} while (inputValidate == false);
+				if (userGuess == manticoreDistance)
+				{
+					Console.WriteLine("Direct hit! The Manticore has suffered damage.");
+				} else if (userGuess > manticoreDistance)
+				{
+					Console.WriteLine("Overshot! Your attack landed too far!");
+				} else if (userGuess < manticoreDistance)
+				{
+					Console.WriteLine("Too close! Your attack didn't make it far enough.");
+				}
+				cityHealth--;
+				Console.WriteLine($"The Manticore is attacking! Your city has {cityHealth} health remaining.");
+			}
 		}
 	}
 }
